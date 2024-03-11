@@ -47,8 +47,8 @@ source code from the framework
 [X] 9. Print a list of everything from the application global context (application
 sandbox) with the data types specified
 
-10. Compare an application sandboxed context keys before application loaded and
-    after, print it from the framework and find a difference (keys added / deleted)
+[X] 10. Compare an application sandboxed context keys before application loaded and
+after, print it from the framework and find a difference (keys added / deleted)
 
 ## Additional tasks
 

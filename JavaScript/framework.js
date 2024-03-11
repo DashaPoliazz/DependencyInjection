@@ -55,6 +55,25 @@ const safeRequire = (name) => {
   }
 };
 
+const createObservable = (obj, onChange) => {
+  return new Proxy(obj, {
+    set(target, prop, value) {
+      console.log(
+        `Key ${prop} has been modified from ${target[prop]} to ${value}`,
+      );
+      target[prop] = value;
+      onChange();
+      return true;
+    },
+    deleteProperty(target, prop) {
+      delete target[prop];
+      console.log(`Key: ${prop} has been removed`);
+      onChange();
+      return true;
+    },
+  });
+};
+
 const runSandboxed = (filePath) => {
   const fileName = filePath.concat("main.js");
   const parentDirectory = path.basename(path.dirname(fileName));
@@ -75,14 +94,17 @@ const runSandboxed = (filePath) => {
   };
 
   context.global = context;
-  const sandbox = api.vm.createContext(context);
+
+  const observableContext = createObservable(context, () =>
+    console.log("Changes has been occured!"),
+  );
+
+  const sandbox = api.vm.createContext(observableContext);
   // Read an application source code from the file
   api.fs.readFile(fileName, (err, src) => {
     // We need to handle errors here
 
     // Run an application in sandboxed context
-
-    console.log("");
 
     const script = new api.vm.Script(src, fileName);
     const f = script.runInNewContext(sandbox);
