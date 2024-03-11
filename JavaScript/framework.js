@@ -86,7 +86,14 @@ const runSandboxed = (filePath) => {
 
     const script = new api.vm.Script(src, fileName);
     const f = script.runInNewContext(sandbox);
-    if (f) f();
+    if (f) {
+      const hash = f();
+      if (hash) {
+        console.log("HASH", hash);
+        const keys = Object.keys(hash);
+        for (const key of keys) console.log(`KEY: ${key}, VALUE: ${hash[key]}`);
+      }
+    }
 
     // We can access a link to exported interface from sandbox.module.exports
     // to execute, save to the cache, print to console, etc.

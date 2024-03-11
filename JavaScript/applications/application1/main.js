@@ -12,6 +12,11 @@ api.console.log(
   "From application1 global context",
 );
 
+const hash = {
+  foo: "bar",
+  bar: 42,
+};
+
 module.exports = () => {
   // Print from the exported function context
 
@@ -33,4 +38,6 @@ module.exports = () => {
     );
     // api.console.log("From application1 exported function");
   }, 5000);
+
+  return hash;
 };

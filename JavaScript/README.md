@@ -38,8 +38,8 @@ console output into a file in the format: `<applicationName> <time> <message>`
 [X] 6. Give a link to `require` function to the application, add call to it and
 wrap it for logging to a file in the format: `<time> <module name>`
 
-7. Export a hash from `application.js` with multiple functions and variables,
-   print the list with types from framework
+[X] 7. Export a hash from `application.js` with multiple functions and variables,
+print the list with types from framework
 
 8. Export a function from `application.js` and print its parameter count and
    source code from the framework
