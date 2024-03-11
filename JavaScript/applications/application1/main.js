@@ -5,7 +5,11 @@
 // another pice of code from `framework.js`. Read README.md for tasks.
 
 // Print from the global context of application module
-api.console.log("From application1 global context");
+api.console.log(
+  __dirname,
+  new Date(Date.now()).toISOString(),
+  "From application1 global context",
+);
 
 module.exports = () => {
   // Print from the exported function context
@@ -21,6 +25,11 @@ module.exports = () => {
   });
 
   api.timers.setTimeout(() => {
-    api.console.log("From application1 exported function");
+    api.console.log(
+      __dirname,
+      new Date(Date.now()).toISOString(),
+      "From application1 exported function",
+    );
+    // api.console.log("From application1 exported function");
   }, 5000);
 };

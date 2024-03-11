@@ -32,8 +32,8 @@ command line option, e.g.: `node framework <applicationName>`
 [X] 4. Wrap or intercept `console.log()` call to add more info into console output
 in the following format: `<applicationName> <time> <message>`
 
-5. Wrap or intercept `console.log()` in the sandboxed application logging all
-   console output into a file in the format: `<applicationName> <time> <message>`
+[X] 5. Wrap or intercept `console.log()` in the sandboxed application logging all
+console output into a file in the format: `<applicationName> <time> <message>`
 
 6. Give a link to `require` function to the application, add call to it and
    wrap it for logging to a file in the format: `<time> <module name>`

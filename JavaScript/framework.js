@@ -53,7 +53,9 @@ const safeRequire = (name) => {
 };
 
 const runSandboxed = (filePath) => {
-  const fileName = filePath + "main.js";
+  const fileName = filePath.concat("main.js");
+  const parentDirectory = path.basename(path.dirname(fileName));
+
   const context = {
     module: {},
     require: safeRequire,
@@ -66,7 +68,9 @@ const runSandboxed = (filePath) => {
       fs: cloneInterface(api.sandboxedFs.bind(filePath)),
       util: api.util,
     },
+    __dirname: parentDirectory,
   };
+
   context.global = context;
   const sandbox = api.vm.createContext(context);
   // Read an application source code from the file
@@ -75,13 +79,7 @@ const runSandboxed = (filePath) => {
 
     // Run an application in sandboxed context
 
-    // adding ability to see logs from different files:
-    const applicationName = path.basename(filePath);
-    context.api.console.log = context.api.console.log.bind(
-      null,
-      applicationName,
-      new Date(Date.now()).toISOString(),
-    );
+    console.log("");
 
     const script = new api.vm.Script(src, fileName);
     const f = script.runInNewContext(sandbox);
