@@ -29,8 +29,8 @@ calls to its functions from applied code
 [X] 3. Implement the ability to run different applications inside framework, using
 command line option, e.g.: `node framework <applicationName>`
 
-4. Wrap or intercept `console.log()` call to add more info into console output
-   in the following format: `<applicationName> <time> <message>`
+[X] 4. Wrap or intercept `console.log()` call to add more info into console output
+in the following format: `<applicationName> <time> <message>`
 
 5. Wrap or intercept `console.log()` in the sandboxed application logging all
    console output into a file in the format: `<applicationName> <time> <message>`

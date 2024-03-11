@@ -29,9 +29,8 @@ if (!fs.existsSync(applicationPath)) {
   process.exit(1);
 }
 
-const log = (s) => {
-  console.log("Prints something from sandbox");
-  console.log(s);
+const log = (applicationName, time, s) => {
+  console.log(`${applicationName} ${time} ${s}`);
 };
 
 const timeout = (cb, ms) => {
@@ -53,8 +52,8 @@ const safeRequire = (name) => {
   }
 };
 
-const runSandboxed = (path) => {
-  const fileName = path + "main.js";
+const runSandboxed = (filePath) => {
+  const fileName = filePath + "main.js";
   const context = {
     module: {},
     require: safeRequire,
@@ -64,7 +63,7 @@ const runSandboxed = (path) => {
         setTimeout: timeout,
         setInterval: interval,
       },
-      fs: cloneInterface(api.sandboxedFs.bind(path)),
+      fs: cloneInterface(api.sandboxedFs.bind(filePath)),
       util: api.util,
     },
   };
@@ -75,6 +74,15 @@ const runSandboxed = (path) => {
     // We need to handle errors here
 
     // Run an application in sandboxed context
+
+    // adding ability to see logs from different files:
+    const applicationName = path.basename(filePath);
+    context.api.console.log = context.api.console.log.bind(
+      null,
+      applicationName,
+      new Date(Date.now()).toISOString(),
+    );
+
     const script = new api.vm.Script(src, fileName);
     const f = script.runInNewContext(sandbox);
     if (f) f();
