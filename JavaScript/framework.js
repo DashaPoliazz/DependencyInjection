@@ -9,6 +9,7 @@ const api = {};
 const fs = require("node:fs");
 api.fs = fs;
 api.vm = require("node:vm");
+api.util = require("node:util");
 api.sandboxedFs = require("sandboxed-fs");
 
 const { cloneInterface, wrapFunction } = require("./wrapper.js");
@@ -49,6 +50,7 @@ const runSandboxed = (path) => {
         setInterval: interval,
       },
       fs: cloneInterface(api.sandboxedFs.bind(path)),
+      util,
     },
   };
   context.global = context;

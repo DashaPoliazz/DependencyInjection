@@ -23,7 +23,7 @@ for somebody, please see additional tasks below.
 [X] 1. Add `setTimeout` and `setInterval` to the application context and use them
 printing something from the timer function using `console.log()`
 
-[] 2. Inject a link to `util` library into the application context and make a few
+[X] 2. Inject a link to `util` library into the application context and make a few
 calls to its functions from applied code
 
 3. Implement the ability to run different applications inside framework, using
