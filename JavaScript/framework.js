@@ -9,13 +9,22 @@ const api = {};
 const fs = require("node:fs");
 api.fs = fs;
 api.vm = require("node:vm");
-// api.sandboxedFs = require("sandboxed-fs");
+api.sandboxedFs = require("sandboxed-fs");
 
 const { cloneInterface, wrapFunction } = require("./wrapper.js");
 
 const log = (s) => {
   console.log("Prints something from sandbox");
   console.log(s);
+};
+
+const timeout = (cb, ms) => {
+  console.log("Hello from timeout!");
+  return setTimeout(cb, ms);
+};
+const interval = (cb, ms) => {
+  console.log("Hello from interval!");
+  return setInterval(cb, ms);
 };
 
 const safeRequire = (name) => {
@@ -36,11 +45,10 @@ const runSandboxed = (path) => {
     api: {
       console: { log },
       timers: {
-        setTimeout: wrapFunction("setTimeout", setTimeout),
+        setTimeout: timeout,
+        setInterval: interval,
       },
-      // Error: cannot find module "sandboxed-fs";
-      // fs: cloneInterface(api.sandboxedFs.bind(path)),
-      fs,
+      fs: cloneInterface(api.sandboxedFs.bind(path)),
     },
   };
   context.global = context;
