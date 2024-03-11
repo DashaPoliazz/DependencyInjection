@@ -91,7 +91,15 @@ const runSandboxed = (filePath) => {
       if (hash) {
         console.log("HASH", hash);
         const keys = Object.keys(hash);
-        for (const key of keys) console.log(`KEY: ${key}, VALUE: ${hash[key]}`);
+        for (const key of keys) {
+          if (typeof hash[key] === "function") {
+            const name = hash[key].name;
+            const len = hash[key].length;
+            console.log(`Length: ${len}, Name: ${name}`);
+            continue;
+          }
+          console.log(`KEY: ${key}, VALUE: ${hash[key]}`);
+        }
       }
     }
 

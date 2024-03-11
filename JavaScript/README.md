@@ -41,11 +41,11 @@ wrap it for logging to a file in the format: `<time> <module name>`
 [X] 7. Export a hash from `application.js` with multiple functions and variables,
 print the list with types from framework
 
-8. Export a function from `application.js` and print its parameter count and
-   source code from the framework
+[X] 8. Export a function from `application.js` and print its parameter count and
+source code from the framework
 
-9. Print a list of everything from the application global context (application
-   sandbox) with the data types specified
+[X] 9. Print a list of everything from the application global context (application
+sandbox) with the data types specified
 
 10. Compare an application sandboxed context keys before application loaded and
     after, print it from the framework and find a difference (keys added / deleted)

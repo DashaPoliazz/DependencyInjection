@@ -15,6 +15,11 @@ api.console.log(
 const hash = {
   foo: "bar",
   bar: 42,
+  fn: (name, age) => {
+    const somecode = "foo";
+    const anotherCode = "bar";
+    return somecode.concat(anotherCode);
+  },
 };
 
 module.exports = () => {
