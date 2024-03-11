@@ -7,12 +7,27 @@
 // The framework can require core libraries
 const api = {};
 const fs = require("node:fs");
+const path = require("node:path");
 api.fs = fs;
 api.vm = require("node:vm");
 api.util = require("node:util");
 api.sandboxedFs = require("sandboxed-fs");
 
 const { cloneInterface, wrapFunction } = require("./wrapper.js");
+
+const applicationName = process.argv[2];
+
+if (!applicationName) {
+  console.error("You have to pass the name of application you want to run");
+  process.exit(1);
+}
+
+const applicationPath = path.join(__dirname, "applications", applicationName);
+
+if (!fs.existsSync(applicationPath)) {
+  console.error(`Application ${applicationName} is not found!`);
+  process.exit(1);
+}
 
 const log = (s) => {
   console.log("Prints something from sandbox");
@@ -50,7 +65,7 @@ const runSandboxed = (path) => {
         setInterval: interval,
       },
       fs: cloneInterface(api.sandboxedFs.bind(path)),
-      util,
+      util: api.util,
     },
   };
   context.global = context;
