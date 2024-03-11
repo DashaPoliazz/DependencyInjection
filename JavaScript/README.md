@@ -35,8 +35,8 @@ in the following format: `<applicationName> <time> <message>`
 [X] 5. Wrap or intercept `console.log()` in the sandboxed application logging all
 console output into a file in the format: `<applicationName> <time> <message>`
 
-6. Give a link to `require` function to the application, add call to it and
-   wrap it for logging to a file in the format: `<time> <module name>`
+[X] 6. Give a link to `require` function to the application, add call to it and
+wrap it for logging to a file in the format: `<time> <module name>`
 
 7. Export a hash from `application.js` with multiple functions and variables,
    print the list with types from framework

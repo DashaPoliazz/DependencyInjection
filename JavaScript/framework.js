@@ -43,6 +43,9 @@ const interval = (cb, ms) => {
 };
 
 const safeRequire = (name) => {
+  const currentTime = new Date(Date.now()).toISOString();
+  console.log(`Module name: ${name}, ${currentTime}`);
+
   if (name === "fs") {
     const msg = "You dont have access to fs API";
     console.log(msg);
